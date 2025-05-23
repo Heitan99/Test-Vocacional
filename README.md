@@ -2,21 +2,65 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### Configuración de Variables de Entorno
+
+Este proyecto utiliza diferentes proveedores de IA que requieren API keys para funcionar.
+
+#### Desarrollo Local
+
+Para desarrollo local, ya hemos creado un archivo `.env.local` para ti. Solo necesitas:
+
+1. Editar `.env.local` y agregar tus API keys para los proveedores que deseas utilizar:
+   ```
+   NEXT_PUBLIC_AI_PROVIDER=openai
+   NEXT_PUBLIC_AI_MODEL=gpt-4o
+   NEXT_PUBLIC_OPENAI_API_KEY=tu-api-key-aquí
+   ```
+
+2. Durante el desarrollo, puedes usar estas variables con prefijo `NEXT_PUBLIC_` para pruebas.
+
+#### Configuración para Producción
+
+Para entornos de producción, hemos implementado un enfoque de seguridad robusto:
+
+1. **API Keys protegidas**: Las claves se almacenan en variables de entorno del servidor sin el prefijo `NEXT_PUBLIC_`
+2. **API Routes seguras**: Todas las llamadas a APIs de IA se realizan desde el servidor mediante API Routes
+3. **No exposición al cliente**: Las claves nunca se exponen en el navegador
+
+Para configurar el entorno de producción:
+
+```bash
+node scripts/set-env-vars.js
+```
+
+Este script te guiará para configurar las variables en tu plataforma de despliegue (Vercel, Netlify, etc.).
+
+#### Uso de API Routes Seguras
+
+Hemos implementado API Routes seguras en:
+- `/api/assessment/generate-results` - Para generar resultados de evaluación
+- `/api/assessment/feedback` - Para retroalimentación instantánea
+- `/api/assessment/next-question` - Para preguntas adaptativas
+
+Utiliza las funciones del cliente en `src/lib/api/client.ts` que manejan automáticamente estas rutas seguras.
+
+### Desarrollo Local
+
+Una vez configuradas las variables de entorno, inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
+# o
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) con tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Puedes comenzar a editar la página modificando `app/page.tsx`. La página se actualiza automáticamente a medida que editas el archivo.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
