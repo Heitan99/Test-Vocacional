@@ -167,21 +167,3 @@ npm run typecheck # TypeScript sin emitir
 `GET /api/results?id=y6j37wrb` devuelve el resultado guardado.
 
 El almacenamiento es un `Map` en memoria con un tope de 500 entradas. Alcanza para el MVP y para desarrollo; para producción conviene reemplazarlo por Postgres, Redis o Supabase sin tocar el resto de la app.
-
----
-
-## Roadmap
-
-- [ ] Exportar el perfil a PDF con las carreras detalladas.
-- [ ] Comparar dos perfiles (amigos, pareja, equipo).
-- [ ] Panel para orientadores con resultados agregados.
-- [ ] Persistencia real y enlaces cortos.
-- [ ] Tests del motor de puntaje.
-
----
-
-## Créditos
-
-Modelo RIASEC de John L. Holland. Tipografía [Sora](https://fonts.google.com/specimen/Sora). Iconos de [Lucide](https://lucide.dev). El modelo 3D del cerebro se mantiene fuera del repositorio.
-
-Proyecto de portafolio. Sin fines comerciales.
