@@ -1,43 +1,58 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import './globals.css'
-import './animations.css'
-import { MainNav } from "@/components/layout/main-nav";
-import { Footer } from "@/components/layout/footer";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import type { Metadata, Viewport } from "next";
+import { Sora } from "next/font/google";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sora = Sora({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "VocaTest - Descubre tu vocación profesional",
-  description: "Plataforma interactiva para el descubrimiento vocacional potenciada por Inteligencia Artificial",
+  title: {
+    default: "voca — Descubrí tu perfil vocacional",
+    template: "%s · voca",
+  },
+  description:
+    "Un test vocacional de 18 preguntas que ilumina tu cerebro según tus intereses. Perfil RIASEC, carreras sugeridas y una tarjeta para compartir.",
+  keywords: [
+    "test vocacional",
+    "RIASEC",
+    "orientación vocacional",
+    "carreras",
+    "perfil profesional",
+  ],
+  openGraph: {
+    title: "voca — Descubrí tu perfil vocacional",
+    description:
+      "18 preguntas. Tu cerebro se ilumina por zonas. Al final, tu perfil y las carreras donde más te vas a parecer a vos.",
+    type: "website",
+    locale: "es_AR",
+    siteName: "voca",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "voca — Descubrí tu perfil vocacional",
+    description:
+      "18 preguntas. Un cerebro que se ilumina. Un perfil vocacional para compartir.",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#05060b",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col antialiased`}
+        className={`${sora.variable} min-h-svh bg-[#05060b] font-sans text-[#f4f6ff] antialiased`}
       >
-        <ThemeProvider>
-          <MainNav />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
